@@ -24,7 +24,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients
                 .inMemory()
-                .withClient("alphatest1")
+                .withClient("alpha")
                 .secret("alpha_secret")
                 .authorizedGrantTypes("authorization_code", "implicit","client_credentials","password")
                 .scopes("Write","Read","All")
