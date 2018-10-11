@@ -17,12 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Order(1)
 public class LoginConfig extends WebSecurityConfigurerAdapter {
     private static final String[] IGNORE_URIS = {
-            "/swagger-resources/**",
-            "/swagger-ui.html",
-            "/v2/api-docs",
-            "/webjars/**",
             "/resources/**",
-            "/h2-console/**",
             "/common/**",
             "/configuration/ui",
             "/configuration/security",
@@ -54,7 +49,9 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin").password("{noop}admin").roles("ADMIN");
+        auth.inMemoryAuthentication()
+                .withUser("user").password("user").roles("USER").and()
+                .withUser("admin").password("{noop}admin").roles("ADMIN");
     }
 
     @Bean
