@@ -16,12 +16,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @Order(1)
 public class LoginConfig extends WebSecurityConfigurerAdapter {
+  
     private static final String[] IGNORE_URIS = {
-            "/resources/**",
-            "/common/**",
-            "/configuration/ui",
-            "/configuration/security",
-            "/error"
+        "/error"
     };
 
     @Bean
@@ -38,7 +35,8 @@ public class LoginConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/**").permitAll();
+        http.csrf().disable().authorizeRequests()
+                .anyRequest().authenticated() .antMatchers("/oauth/token/").permitAll().and().formLogin().and().httpBasic();
     }
 
     @Override
