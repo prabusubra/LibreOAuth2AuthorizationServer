@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>OAuth 2.0 client details</title>
+    <style>
+    table, td, th {
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+        th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+.toolbar{
+    position: relative;
+    left: 90%;
+    display: inline-block;
+}
+.toolbarcontent{
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    z-index: 1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+}
+.toolbar:hover .toolbarcontent {
+    display: block;
+}
+.toolbarcontent div:hover {background-color: #ddd;}
+    </style>
+</head>
+<body>
+<nav>
+    <div class="toolbar">
+    <span th:inline="text">User, [[${#httpServletRequest.remoteUser}]]!</span>
+    <div class="toolbarcontent">
+        <div>
+            <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+        </div>
+        <div><input type="button" value="Create" class="createClientDetails"></div>
+        <div>Help</div>
+    </div></div>
+</nav>
+<div>
+        <table>
+            <tr>
+                <th>Client id</th>
+                <th>Client Secret</th>
+                <th>Grant types</th>
+                <th>scope</th>
+                <th>Access token validity</th>
+                <th>Refresh token validity</th>
+                <th>Redirect URLs</th>
+            </tr>
+            <tr th:each="clientdetails : ${clientDetails}">
+                <td th:text="${clientdetails.clientId}"></td>
+                <td th:text="${clientdetails.clientSecret}"></td>
+                <td>
+                    <ul th:each="value : ${clientdetails.authorizedGrantTypes}">
+                        <li th:text="${value}"></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul th:each="value : ${clientdetails.scope}">
+                        <li th:text="${value}"></li>
+                    </ul>
+                </td>
+                <td>
+                    <ul th:each="value : ${clientdetails.registeredRedirectUri}">
+                        <li th:text="${value}"></li>
+                    </ul>
+                </td>
+                <td th:text="${clientdetails.accessTokenValiditySeconds}"></td>
+                <td th:text="${clientdetails.refreshTokenValiditySeconds}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
