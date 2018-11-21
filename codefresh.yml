@@ -1,23 +1,15 @@
 version: '1.0'
 steps:
-  Compilation:
-    title: Compile/Unit test
-    image: maven:3.5.2-jdk-8-alpine
-    commands:
-     - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository package
-  Integration:
-    title: Integration test
+ Integration:
+    title: Building Maven Application
     image: maven:3.5.2-jdk-8-alpine
     commands:
      - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository verify
-  BuildingDockerImage:
+ BuildingDockerImage:
     title: Building Docker Image
     type: build
     image_name: imgLibreOAuth2AuthorizationServer
     working_directory: ./
     tag: '${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}'
     dockerfile: Dockerfile
-    metadata: # Declare the metadata attribute
-      set: # Specify the set operation
-        - build_style: non-multi-stage
-
+         - build_style: non-multi-stage
