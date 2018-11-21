@@ -4,7 +4,7 @@ steps:
     title: Building Maven Application
     image: maven:3.5.2-jdk-8-alpine
     commands:
-     - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository verify
+     - mvn -Dmaven.repo.local=/codefresh/volume/m2_repository clean verify
  BuildingDockerImage:
     title: Building Docker Image
     type: build
