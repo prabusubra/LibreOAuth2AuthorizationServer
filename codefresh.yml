@@ -13,7 +13,7 @@ steps:
   BuildingDockerImage:
     title: Building Docker Image
     type: build
-    image_name: spring-boot-2-sample-app
+    image_name: imgLibreOAuth2AuthorizationServer
     working_directory: ./
     tag: '${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}'
     dockerfile: Dockerfile
