@@ -20,3 +20,4 @@ steps:
     metadata: # Declare the metadata attribute
       set: # Specify the set operation
 - build_style: non-multi-stage
+
