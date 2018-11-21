@@ -19,5 +19,5 @@ steps:
     dockerfile: Dockerfile
     metadata: # Declare the metadata attribute
       set: # Specify the set operation
-- build_style: non-multi-stage
+        - build_style: non-multi-stage
 
