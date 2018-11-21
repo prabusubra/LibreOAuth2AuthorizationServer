@@ -12,4 +12,6 @@ steps:
     working_directory: ./
     tag: '${{CF_BRANCH_TAG_NORMALIZED}}-${{CF_SHORT_REVISION}}'
     dockerfile: Dockerfile
-         - build_style: non-multi-stage
+    metadata: 
+      set:
+        - build_style: non-multi-stage
